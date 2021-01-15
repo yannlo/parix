@@ -16,3 +16,14 @@ checked.addEventListener('click',function(event){
     }
 });
 
+
+// popup  action
+
+let checker1 = document.getElementById("checker1");
+
+checker1.addEventListener('click',function(event){
+    event.stopPropagation();
+    let popup = document.getElementsByClassName('popup')[0];
+    popup.style.display= "none";
+
+});

@@ -172,6 +172,7 @@ section{
     
 }
 
+
 section h1{
     text-align: center;
     width: 100%;
@@ -328,6 +329,7 @@ section .parti p{
 }
 
 #service p input, #service .block input {
+    border-radius: 3px;
     display: block;
     max-width: 600px;
     margin: 10px 0;
@@ -351,10 +353,12 @@ section .parti p{
 }
 
 #service textarea{
+    border-radius: 3px;
     display: block;
     font-size: 1em; width: 100%;
     max-width: 620px;
     height:250px;
+    border: 0px;
 
 }
 
@@ -449,3 +453,71 @@ max-height: 180px;
 padding:100px 10%;
 
 }
+
+
+.popup{
+    position :fixed;
+    top: 0px;
+    width : 101%;
+    height : 101vh;
+    z-index: 1000;
+    display:none;
+}
+.popup .content{
+    background-color:rgba(0, 0, 0, 0.582);
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    
+}
+
+.popup .form{
+    background-color: #fff;
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 20px 30px;
+    overflow:auto;
+
+}
+
+.validation_msg{
+    max-width:1000px;
+}
+.validation_msg label
+{
+    max-width:950px;
+}
+.popup .form p{
+    padding: 20px 0;
+    text-align: justify;
+    line-height: 25px;
+}
+
+.popup .form h2{
+    color:#ff6633;
+    font-size:1.8em;
+    margin-top: 50px;
+}
+
+.popup .form label{
+    width: 68%;
+    padding: 10px 2%;
+    background-color: #fff;
+    position: absolute;
+    display: block;
+    font-size:1.7em;
+    text-align: right;
+    margin: 0;
+    top: 15%;
+}
+
+.popup .form .checker{
+    display:none;
+}
+.popup .form label[for="checker1"] i:hover{
+    color: #cc3300;
+    transition: all 0.2s;
+}
+
