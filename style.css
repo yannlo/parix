@@ -461,7 +461,7 @@ padding:100px 10%;
     width : 101%;
     height : 101vh;
     z-index: 1000;
-    display:none;
+    display:table;
 }
 .popup .content{
     background-color:rgba(0, 0, 0, 0.582);
@@ -490,8 +490,9 @@ padding:100px 10%;
     max-width:950px;
 }
 .popup .form p{
+    font-size: 1.3em;
     padding: 20px 0;
-    text-align: justify;
+    text-align: center;
     line-height: 25px;
 }
 
