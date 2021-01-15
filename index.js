@@ -27,3 +27,43 @@ checker1.addEventListener('click',function(event){
     popup.style.display= "none";
 
 });
+
+// formulaire traitement
+let forme = document.getElementById("reservation");
+
+forme.addEventListener("submit",function(event){
+
+    event.preventDefault();
+
+
+    var data = new FormData(this);
+
+    let popup = document.getElementsByClassName('popup')[0];
+    let msg = document.getElementById("msg");
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log(this.response);
+
+            var res = this.response;
+            popup.style.display= "table";
+            msg.innerHTML =res.msg;
+
+
+        }else if(this.readyState== 4){
+            popup.style.display= "table";
+            msg.innerHTML = "une erreur est survenu...";
+
+        }
+    };
+
+    xhr.open("POST", "php_acces/script.php", true);
+    xhr.responseType ="json";
+    // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(data);
+
+    return false;
+
+});
+

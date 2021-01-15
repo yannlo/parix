@@ -87,19 +87,19 @@
                     <h2>Reservation</h2>
                     <form id="reservation">
                         <p> 
-                            <label for="nomComplet">Entrer votre nom complet:</label>
+                            <label for="nomComplet">Entrer votre nom complet:  **</label>
                             <input type="text" id="nomComplet" name="nomComplet" />
                         </p>
                         <p>
-                            <label for="date">Entrer la date et l'heure de la reservation:</label>
+                            <label for="date">Entrer la date et l'heure de la reservation:  **</label>
                             <div class="block">
                                 <input type="date" id="date" name="date"/>
-                                <input type="time" name="heure"  placeholder=" Entrer votre nom complet"/>
+                                <input type="time" name="heure" min="10:00" max="22:00"  placeholder=" Entrer votre nom complet"/>
                             </div>
                         </p>
                         <p> 
-                            <label for="contact">Entrer votre numéro de telephone:</label>
-                            <input type="text" id="contact" name="contact" placeholder="01 02 03 04" format="XX XX XX XX" />
+                            <label for="contact">Entrer votre numéro de telephone:  **</label>
+                            <input type="tel" id="contact" name="contact" placeholder="01 02 03 04" format="XX XX XX XX" />
                         </p>
                         <p> 
                             <label for="message">Entrer une note de préparation: (Optionnel)</label><br/>
@@ -182,12 +182,7 @@
                 </label>
                 <input type="checkbox" id="checker1" />
                 <h2>bienvenu</h2>
-                <p>
-                    <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, tenetur! Fugiat explicabo voluptates id temporibus similique, esse fuga est enim cumque hic qui, accusamus quia quis? Amet quo sint totam.</span>
-                    <span>Incidunt, tempora? Quia molestiae enim similique! Optio laboriosam quam dolore ipsa. Error illo ducimus repellat neque aspernatur inventore molestiae ut similique, est consectetur maxime asperiores, quod voluptatum reprehenderit beatae ad.</span>
-                    <span>Deleniti eligendi quam officia soluta cumque sunt accusamus magni voluptas amet? Aperiam, provident? Aliquid, esse, hic libero minima asperiores, blanditiis perspiciatis molestias modi officia fugiat enim natus provident distinctio explicabo?</span>
-                    <span>Sequi fugit voluptates eaque assumenda laboriosam enim excepturi porro! Minima fugiat, eveniet vel, facere sit eligendi animi, deleniti vero sed consequuntur nostrum. Laborum quam officiis eveniet, reprehenderit minima blanditiis minus.</span>
-                </p>
+                <p id = "msg"></p>
             </div>
         </div>
     </div>
