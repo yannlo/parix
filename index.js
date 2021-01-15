@@ -22,9 +22,24 @@ checked.addEventListener('click',function(event){
 let checker1 = document.getElementById("checker1");
 
 checker1.addEventListener('click',function(event){
+    
+    let msg = document.getElementById("msg");
     event.stopPropagation();
     let popup = document.getElementsByClassName('popup')[0];
     popup.style.display= "none";
+    msg.innerHTML="";
+
+});
+
+let checker2 = document.getElementById("checker2");
+
+checker2.addEventListener('click',function(event){
+    
+    let msg = document.getElementById("msg");
+    event.stopPropagation();
+    let popup = document.getElementsByClassName('popup')[1];
+    popup.style.display= "none";
+    msg.innerHTML="";
 
 });
 
@@ -52,6 +67,7 @@ forme.addEventListener("submit",function(event){
 
 
         }else if(this.readyState== 4){
+            console.log(this);
             popup.style.display= "table";
             msg.innerHTML = "une erreur est survenu...";
 
@@ -67,3 +83,19 @@ forme.addEventListener("submit",function(event){
 
 });
 
+
+
+
+// commande gestion
+
+
+let link = document.getElementById("commandeLink");
+
+link.addEventListener("click", function(event){
+    event.preventDefault();
+
+    
+    let popup = document.getElementsByClassName('popup')[1]; // modifier avant verification final 
+    popup.style.display= "table";
+
+});
