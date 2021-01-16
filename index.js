@@ -74,7 +74,7 @@ forme.addEventListener("submit",function(event){
         }
     };
 
-    xhr.open("POST", "php_acces/script.php", true);
+    xhr.open("POST", "php_acces/script_reservation.php", true);
     xhr.responseType ="json";
     // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(data);
