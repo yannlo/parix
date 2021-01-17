@@ -1,76 +1,57 @@
 <?php
 
+
 $bdd = new PDO('mysql:host=localhost;dbname=parixproject','yannlo','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
-$message="";
 $success = 0;
-$msg="Une erreur de traitement est survenue...";
+$msg = '';
+if(!empty($_POST["table"]) AND count(json_decode($_POST["table"])) != 0 ){
+    
 
-if(!empty($_POST["nomComplet"]) AND !empty($_POST["date"]) AND !empty($_POST["heure"]) AND  !empty($_POST["contact"]) ){
+    $table =$_POST["table"];
 
-    $nomComplet = htmlspecialchars($_POST["nomComplet"]);
-    $date = preg_replace('#([0-9]{2})/([0-9]{2})/([0-9]{4})#',"$1-$2-$3",$_POST["date"]);
-    $heure = $_POST["heure"];
-    $contact = htmlspecialchars($_POST["contact"]);
+    // echo("tableau no vide \n");
 
-    if(strlen($_POST["nomComplet"]) < 60){
+    if (!empty($_POST["nomComplete"]) AND !empty($_POST["phone"]) AND !empty($_POST["adresse"]) AND !empty($_POST["paiement"])) {
         
-        if (empty($_POST["message"])){
-
-
-            $request = $bdd -> prepare("INSERT INTO reservation (nomComplet,date_reservation,heure,contact) VALUES (:nomComplet, :date_reservation, :heure, :contact ) ");
-            $request -> execute(array(
-    
-                "nomComplet" => $nomComplet,
-                "date_reservation" => $date,
-                "heure" => $heure,
-                "contact" => $contact
-            ));
-            
-            $msg="Votre reservation a bien été prise en compte";
-    
-    
-            
-    
-    
-            }else if (!empty($_POST["message"])){
-
-                $message=htmlspecialchars($_POST["message"]);
-
-                $request = $bdd -> prepare("INSERT INTO reservation (nomComplet,date_reservation,heure,contact, messages) VALUES (:nomComplet, :date_reservation, :heure, :contact, :messages) ");
-                $request -> execute(array(
+        $nom = htmlspecialchars($_POST["nomComplete"]);
+        $phone = htmlspecialchars($_POST["phone"]);
+        $adresse = htmlspecialchars($_POST["adresse"]);
+        $paiement = (int) $_POST["paiement"];
         
-                    "nomComplet" => $nomComplet,
-                    "date_reservation" => $date,
-                    "heure" => $heure,
-                    "contact" => $contact,
-                    "messages" => $message
-                ));
+        // echo("formulaire correctement saisie \n");
+        
+        $add_command = $bdd -> prepare("INSERT INTO comande (commande,nomClient,numeroClient,adresseClient,idOptionPaiement, idEtatCommande) VALUES (:commande, :nomClient, :numeroClient, :adresseClient, :idOptionPaiement,  :idEtatCommande ) ");
+        $add_command -> execute(array(
+            "commande"=>$table,
+            "nomClient"=> $nom,
+            "numeroClient"=> $phone,
+            "adresseClient"=> $adresse,
+            "idOptionPaiement"=> $paiement,
+            "idEtatCommande"=> 0
+        ));
 
-                
-                $msg="Votre reservation a bien été prise en compte <br/>Le message a bien été envoyer";
-            }
 
 
+        $success = 1;
+        $msg = 'Votre commande a parfaitement été enregisté. <br /> Nous vous contacterons pour la livraison';
+
+
+    
+    }else{
+    $msg = 'Veuillez remplir tout les champs du formulaire';
 
     }
-    else
-    {
-        $msg="Le nom entrer contient trop de caractère";
-    }
+
 
 }else{
-    $msg="Veillez remplir tout les champs obligatoires";
+    $msg = 'Aucun plat n\'a été selectionné';
 }
 
 
+$result =["success"=>$success, "msg"=>$msg];
 
-
-
-
-$res=["success"=> $success, "msg"=> $msg, "message"=>$message];
-
-echo(json_encode($res));
+echo(json_encode($result));
 
 
 ?>

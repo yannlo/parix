@@ -110,7 +110,7 @@
                     </form>
                 </div>
                 <div class="part av2">
-                    <h2>Commande</h2>
+                    <h2>Commande en ligne</h2>
                     <p>
                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur,
                         rerum unde deleniti quaerat quis iste incidunt quibusdam dolor aut nemo
@@ -181,7 +181,7 @@
                     <i class="fas fa-times" ></i>
                 </label>
                 <input type="checkbox" id="checker1" />
-                <h2>Reservation</h2>
+                <h2 id="title_part_h2"></h2>
                 <p id = "msg"></p>
             </div>
         </div>
@@ -301,15 +301,15 @@
                             <form id="adresse_paiement">
                                 <p>
                                     <label for="nomComplete">Entrer votre nom et prénom:</label>
-                                    <input type="text" name="nomComplete" id="nomComplete" required/>
+                                    <input type="text" name="nomComplete" id="nomComplete" />
                                 </p>
                                 <p>
                                     <label for="phone">Entrer votre numero :</label>
-                                    <input type="tel" name="phone" id="phone" required/>
+                                    <input type="tel" name="phone" id="phone" />
                                 </p>
                                 <p>
                                     <label for="adresse">Entrer l'adresse de livraison :</label>
-                                    <input type="text" name="nomComplet" id="nomComplet" required/>
+                                    <input type="text" name="adresse" id="adresse" />
                                 </p>
                                 <p> 
                                     <label>Selectionner un mode de paiement :</label> 
@@ -324,7 +324,7 @@
 
                                     ?>
 
-                                    <input type="radio" name="paiement" class="livraison" id="option<?php echo $option["id"];?>" value="<?php echo $option["id"];?>" required/>
+                                    <input type="radio" name="paiement" class="livraison" id="option<?php echo $option["id"];?>" value="<?php echo $option["id"];?>" />
                                     <label for="option<?php echo $option["id"];?>">
                                         <?php echo $option["optionP"];?>
                                     </label>

@@ -30,6 +30,8 @@ checker1.addEventListener('click',function(event){
     let msg = document.getElementById("msg");
     event.stopPropagation();
     let popup = document.getElementsByClassName('popup')[0];
+    let title = document.getElementById("title_part_h2");
+    title.innerHTML="";
     popup.style.display= "none";
     msg.innerHTML="";
 
@@ -59,6 +61,8 @@ forme.addEventListener("submit",function(event){
 
     let popup = document.getElementsByClassName('popup')[0];
     let msg = document.getElementById("msg");
+    let title = document.getElementById("title_part_h2");
+    title.innerHTML="Réservation";
     var xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function(){
@@ -181,7 +185,9 @@ function trans_action(val,table=tab){
 
             }
 
-            varix.innerHTML = total;
+
+
+            varix.innerHTML =int(total);
 
             // console.log(prix_val);
 
@@ -201,7 +207,6 @@ function trans_action(val,table=tab){
 
 }
 
-console.log(prix_val);
 // multiplication prix
 
 function multiplication (val,quant,table=tab ,prix_valeur = prix_val){
@@ -224,6 +229,7 @@ function multiplication (val,quant,table=tab ,prix_valeur = prix_val){
         }
 
     }
+
 
 
     varix.innerHTML = total;
@@ -294,42 +300,74 @@ let indexor = document.getElementsByClassName("fact_menu2")[1];
 
     let form2 = document.getElementById("adresse_paiement");
 
-    form2.addEventListener("submit",function(event){
+form2.addEventListener("submit",function(event){
     
-        event.preventDefault();
+    event.preventDefault();
     
     
-        var data = new FormData(this);
-    
-        console.log(data);
+    var data = new FormData(this);
 
-        // let popup = document.getElementsByClassName('popup')[0];
-        // let msg = document.getElementById("msg");
-        // var xhr = new XMLHttpRequest();
     
-        // xhr.onreadystatechange = function(){
-        //     if(this.readyState == 4 && this.status == 200){
-        //         console.log(this.response);
+    let popup = document.getElementsByClassName('popup')[1];
+    let popup2 = document.getElementsByClassName('popup')[0];
+    let msg = document.getElementById("msg");
+    let title = document.getElementById("title_part_h2");
     
-        //         var res = this.response;
-        //         popup.style.display= "table";
-        //         msg.innerHTML =res.msg;
+    let table = JSON.stringify(tab);
     
+    var xhr = new XMLHttpRequest();
     
-        //     }else if(this.readyState== 4){
-        //         console.log(this);
-        //         popup.style.display= "table";
-        //         msg.innerHTML = "une erreur est survenu...";
+
     
-        //     }
-        // };
+    data.append("table",table);
     
-        // xhr.open("POST", "php_acces/script_reservation.php", true);
-        // xhr.responseType ="json";
-        // // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        // xhr.send(data);
-    
-        return false;
-    
-    });
+    title.innerHTML="Commande en ligne";
+
+        
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log(this.response);
+            popup.style.display= "none";
+            popup2.style.display= "table";
+            let res = this.response;
+
+            msg.innerHTML = res.msg;
+
+            if(res.success){
+                let indexor = document.getElementsByClassName("fact_menu2")[0];
+                let indexor1 = document.getElementsByClassName("fact_menu2")[1];
+                let title = document.getElementById("title_ver2");
+                let prev = document.getElementById("prev");
+                let nex = document.getElementById("nex");
+        
+                
+                prev.style="color:#949494; border: 3px solid #949494;"
+                nex.style="color:#ff6633; border: 3px solid #ff6633;"
+                let varix = document.getElementById("result");
+                title.innerHTML="Menu";
+                indexor.style.display = "block";
+                indexor1.style.display = "none";
+                tab=[];
+                trans_action(0,table=tab);
+                tab=[];
+
+            }
+
+        }else if(this.readyState== 4){
+            console.log(this.response);
+
+        }
+
+
+    };
+
+
+    xhr.open("POST", "php_acces/script_validation.php", true);
+    xhr.responseType ="json";
+    // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(data);
+
+    return false;
+});
+
     
