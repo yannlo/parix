@@ -664,6 +664,22 @@ padding:100px 10%;
 
     border-radius: 5px;
 }
+.operated:hover, .activated_operator{
+    background-color: #ff6633ec;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+ .operated .menu_center:hover{
+    border-left: 2px solid #ffffff;
+    border-right: 1px solid #ffffff;
+
+}
+#ver2 .activated_operator .menu_center{
+    border-left: 2px solid #ffffff;
+    border-right: 1px solid #ffffff;
+
+}
 
 #ver1 .menu_elt p,#ver2 .menu_elt p{
 padding: 0px 0px;
@@ -842,15 +858,23 @@ margin: 0;
 
 }
 
-#total_menu h3 #result{
+#total_menu h3 div{
+    display: inline;
      color:black;
      float: right;
+}
+#total_menu h3 #result{
+    display: inline-block;
+    margin: 0 20px;
 }
 
 #cont_menu input{
     width: 50px;
 }
 
+.ppp{
+    display: block;
+}
 
 
 

@@ -209,39 +209,12 @@
 
                         <div id="fact_menu">
 
-                            <div id="cont_menu">
-
-                                <div class="menu_elt">
-                                    <p>
-                                        <img src="images/plats/steak.jpeg" alt="">
-                                    </p>
-                            
-                                    <div class="menu_center">
-                                        <h3>Nom de plat</h3>
-                                        <p>
-                                            <label for="quantite">Quantité :</label>
-                                            <input type="number" min="1" max= "20" name="quantite" value="1" id="quantite" />
-                                        </p>
-                                    </div>
-                            
-                                    <table>
-                                        <tr>
-                                            <th>prix</th>
-                                        </tr>
-                                        <tr>
-                                            <td>XXXXX fcfa</td>
-                                        </tr>
-                                    </table>
-                            
-                                </div>
-        
-
-                            </div>
+                            <div id="cont_menu"></div>
 
 
                             <div id="total_menu">
                                 <h3>
-                                    TOTAL : <span id=result> XXXXX fcfa</span>
+                                    TOTAL :   <div><span id=result>0</span>f cfa</div>
                                 </h3>
                             </div>
 
@@ -254,17 +227,49 @@
                         <h2>Menu</h2>
                         <div id="fact_menu2">
 
+                            
+<?php 
+
+$bdd = new PDO('mysql:host=localhost;dbname=parixproject','yannlo','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
+$get_categorie = $bdd-> query('SELECT * FROM categorieplat ORDER BY id');
+
+while ($categorie = $get_categorie -> fetch()){
+
+?>
+
+
+
                             <div class='group_plat'>
+                                <h2><?php echo($categorie["nomCategorie"] ); ?></h2>
 
-                                <h2>pizza</h2>
+<?php
 
-                                <div class="menu_elt">
-                                    <p>
-                                        <img src="images/plats/steak.jpeg" alt="">
+    $get_plat = $bdd -> prepare("SELECT * FROM menu WHERE idCategoriePlat = :idCategoriePlat ORDER BY nomPlat");
+
+    $get_plat -> execute(array(
+        "idCategoriePlat" => $categorie["id"]
+    ));
+
+    while ($plat = $get_plat -> fetch()){
+?>
+
+
+
+                                <div class="menu_elt operated" id="meo<?php echo($plat["id"] ); ?>"  onclick='let prix_val = trans_action(<?php echo($plat["id"] ); ?>);'>
+                                
+                                <p >
+                                        <img src="images/plats/<?php echo($plat["photoPlat"] ); ?>" alt=""/>
+                                        <input type="hidden" value="<?php echo($plat["id"] ); ?>" />
                                     </p>
                             
-                                    <div class="menu_center">
-                                        <h3>Nom de plat</h3>
+                                    <div class="menu_center" >
+                                        <h3><?php echo($plat["nomPlat"] ); ?></h3>
+                                        <!-- <p class="ppp" id="ppp<?php echo($plat["id"] ); ?>">
+                                            <label for="quantite<?php echo($plat["id"] ); ?>">Quantité :</label>
+                                            <input type="number" min="1" max= "20" name="quantite" value="1"  />
+                                        </p> -->
+
                                     </div>
                             
                                     <table>
@@ -272,14 +277,21 @@
                                             <th>prix</th>
                                         </tr>
                                         <tr>
-                                            <td>XXXXX fcfa</td>
+                                            <td><?php echo($plat["prix"] ); ?> fcfa</td>
                                         </tr>
                                     </table>
                             
                                 </div>
-        
+
+                                
+<?php
+    }
+?>                                
                             </div>
 
+<?php
+}
+?>
 
 
                         </div>
@@ -292,6 +304,8 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="index.js">
+        var prix_val=[];
+    </script>
 </body>
 </html>

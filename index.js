@@ -1,4 +1,6 @@
 console.log("ok");
+var tab=[];
+var prix_val=[];
 
 let checked = document.getElementById('check');
 checked.addEventListener('click',function(event){
@@ -99,3 +101,131 @@ link.addEventListener("click", function(event){
     popup.style.display= "table";
 
 });
+
+
+
+// commande select plat
+
+
+function color(id){
+        // Visual selection
+
+        let elt = document.getElementById(id);
+        if(elt.className == "menu_elt operated"){
+
+            elt.className="menu_elt operated activated_operator";
+
+        }else{
+            elt.className="menu_elt operated";
+        }
+}
+
+
+function trans_action(val,table=tab){
+
+    // selection
+
+    let boole = false;
+    let index=0;
+    for(var i=0; i<table.length; i++) {
+        if(val == table[i][0]) {
+            boole=true;
+            index = i;
+        }
+    }
+    if(boole){
+        table.splice(index, 1);
+    }else{
+        table.push([val, 1])
+    }
+
+    // console.log(prix_val);
+    
+
+    // console.log(JSON.stringify(table));
+    data = JSON.stringify(table);
+
+
+    
+
+    // traitement 
+
+    
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            // console.log(this.response);
+
+            var res = this.response;
+
+            let varex = document.getElementById("cont_menu");
+            let varix = document.getElementById("result");
+            let total = 0;
+
+
+            varex.innerHTML = res.retour;
+            prix_val = res.prix;
+
+
+            for(var i=0; i<table.length; i++) {
+
+                // console.log(table[i][1]);
+                // console.log(total);
+                // console.log(res.prix[i]);
+
+                    total += table[i][1] * parseInt(res.prix[i]);
+
+            }
+
+            varix.innerHTML = total;
+
+            // console.log(prix_val);
+
+        }else if(this.readyState== 4){
+            // console.log(this);  
+
+            Alert("une erreur est survenu...") ;
+
+        }
+    };
+
+    xhr.open("POST", "php_acces/script_commande.php", true);
+    xhr.responseType ="json";
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("var="+data);
+
+
+}
+
+console.log(prix_val);
+// multiplication prix
+
+function multiplication (val,quant,table=tab ,prix_valeur = prix_val){
+
+    let varix = document.getElementById("result");
+    let quant_elt = document.getElementById(quant);
+
+    let total = 0;
+    // console.log(table);
+
+    // console.log(prix_valeur);
+
+    for(var i=0; i<table.length; i++) {
+        if(val == table[i][0]) {
+            // console.log(quant_elt.value);
+            table[i][1] = quant_elt.value;
+            total += parseInt(prix_valeur[i]) * table[i][1];
+        }else{
+            total += parseInt(prix_valeur[i]) * table[i][1];
+        }
+
+    }
+
+
+    varix.innerHTML = total;
+
+
+
+}
