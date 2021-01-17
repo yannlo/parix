@@ -224,35 +224,36 @@
                     </div>
 
                     <div id="ver2">
-                        <h2>Menu</h2>
-                        <div id="fact_menu2">
+                        <h2 id="title_ver2">Menu</h2>
+
+                        <div class="fact_menu2">
 
                             
-<?php 
+                                <?php 
 
-$bdd = new PDO('mysql:host=localhost;dbname=parixproject','yannlo','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                                $bdd = new PDO('mysql:host=localhost;dbname=parixproject','yannlo','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
-$get_categorie = $bdd-> query('SELECT * FROM categorieplat ORDER BY id');
+                                $get_categorie = $bdd-> query('SELECT * FROM categorieplat ORDER BY id');
 
-while ($categorie = $get_categorie -> fetch()){
+                                while ($categorie = $get_categorie -> fetch()){
 
-?>
+                                ?>
 
 
 
                             <div class='group_plat'>
                                 <h2><?php echo($categorie["nomCategorie"] ); ?></h2>
 
-<?php
+                            <?php
 
-    $get_plat = $bdd -> prepare("SELECT * FROM menu WHERE idCategoriePlat = :idCategoriePlat ORDER BY nomPlat");
+                                $get_plat = $bdd -> prepare("SELECT * FROM menu WHERE idCategoriePlat = :idCategoriePlat ORDER BY nomPlat");
 
-    $get_plat -> execute(array(
-        "idCategoriePlat" => $categorie["id"]
-    ));
+                                $get_plat -> execute(array(
+                                    "idCategoriePlat" => $categorie["id"]
+                                ));
 
-    while ($plat = $get_plat -> fetch()){
-?>
+                                while ($plat = $get_plat -> fetch()){
+                            ?>
 
 
 
@@ -283,17 +284,76 @@ while ($categorie = $get_categorie -> fetch()){
                             
                                 </div>
 
-                                
-<?php
-    }
-?>                                
+                                                                
+                                <?php
+                                    }
+                                ?>                                
                             </div>
 
-<?php
-}
-?>
+                            <?php
+                            }
+                            ?>
 
 
+                        </div>
+
+                        <div class="fact_menu2">
+                            <form id="adresse_paiement">
+                                <p>
+                                    <label for="nomComplete">Entrer votre nom et prénom:</label>
+                                    <input type="text" name="nomComplete" id="nomComplete" required/>
+                                </p>
+                                <p>
+                                    <label for="phone">Entrer votre numero :</label>
+                                    <input type="tel" name="phone" id="phone" required/>
+                                </p>
+                                <p>
+                                    <label for="adresse">Entrer l'adresse de livraison :</label>
+                                    <input type="text" name="nomComplet" id="nomComplet" required/>
+                                </p>
+                                <p> 
+                                    <label>Selectionner un mode de paiement :</label> 
+                                    <?php 
+                                    
+                                    $bdd = new PDO('mysql:host=localhost;dbname=parixproject','yannlo','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
+
+                                    $get_option = $bdd -> query("SELECT * FROM optionpaiment");
+
+                                    while ($option = $get_option -> fetch()){
+
+                                    ?>
+
+                                    <input type="radio" name="paiement" class="livraison" id="option<?php echo $option["id"];?>" value="<?php echo $option["id"];?>" required/>
+                                    <label for="option<?php echo $option["id"];?>">
+                                        <?php echo $option["optionP"];?>
+                                    </label>
+                                    <?php
+
+                                    }
+
+                                    ?>
+                                </p>
+
+                                <input type="submit" value="confirmer" class="button" />
+
+                                
+                            </form>
+                        </div>
+
+                        <div id="fact_select_part">
+                            <p class="previous">
+                                <label for="previous" id="prev">
+                                    <i class="fas fa-angle-left" ></i>
+                                </label>
+                                <input type="checkbox" name="previous" id="previous"/>
+                            </p>
+                            <p class="next">
+                                <label for="next" id="nex">
+                                    <i class="fas fa-angle-right" ></i>
+                                </label>
+                                <input type="checkbox" name="next" id="next"/>
+                            </p>
                         </div>
 
 
@@ -305,7 +365,7 @@ while ($categorie = $get_categorie -> fetch()){
     </div>
 
     <script type="text/javascript" src="index.js">
-        var prix_val=[];
+
     </script>
 </body>
 </html>

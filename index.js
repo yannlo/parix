@@ -2,6 +2,8 @@ console.log("ok");
 var tab=[];
 var prix_val=[];
 
+// nav bar annimation
+
 let checked = document.getElementById('check');
 checked.addEventListener('click',function(event){
     event.stopPropagation();
@@ -45,7 +47,7 @@ checker2.addEventListener('click',function(event){
 
 });
 
-// formulaire traitement
+// formulaire reservation
 let forme = document.getElementById("reservation");
 
 forme.addEventListener("submit",function(event){
@@ -229,3 +231,105 @@ function multiplication (val,quant,table=tab ,prix_valeur = prix_val){
 
 
 }
+
+
+// comande adress part
+
+
+let indexor = document.getElementsByClassName("fact_menu2")[1];
+    indexor.style.display = "none";
+
+
+    let previous = document.getElementById("previous");
+
+    previous.addEventListener('click',function(event){
+        event.stopPropagation();
+        event.preventDefault();
+
+        let indexor = document.getElementsByClassName("fact_menu2")[0];
+        let indexor1 = document.getElementsByClassName("fact_menu2")[1];
+        let title = document.getElementById("title_ver2");
+        let prev = document.getElementById("prev");
+        let nex = document.getElementById("nex");
+
+        
+        prev.style="color:#949494; border: 3px solid #949494;"
+        nex.style="color:#ff6633; border: 3px solid #ff6633;"
+        title.innerHTML="Menu";
+        indexor.style.display = "block";
+        indexor1.style.display = "none";
+
+
+
+    });
+
+    let next = document.getElementById("next");
+
+    next.addEventListener('click',function(event){
+        event.stopPropagation();
+        event.preventDefault();
+
+        let indexor = document.getElementsByClassName("fact_menu2")[0];
+        let indexor1 = document.getElementsByClassName("fact_menu2")[1];
+        let title = document.getElementById("title_ver2");
+        let prev = document.getElementById("prev");
+        let nex = document.getElementById("nex");
+
+        
+        nex.style="color:#949494; border: 3px solid #949494;"
+        prev.style="color:#ff6633; border: 3px solid #ff6633;"
+
+        title.innerHTML="Addresse et Paiement";
+        indexor.style.display = "none";
+        indexor1.style.display = "block";
+
+
+
+    });
+
+
+    // envoie formulaire commande
+    
+
+
+    let form2 = document.getElementById("adresse_paiement");
+
+    form2.addEventListener("submit",function(event){
+    
+        event.preventDefault();
+    
+    
+        var data = new FormData(this);
+    
+        console.log(data);
+
+        // let popup = document.getElementsByClassName('popup')[0];
+        // let msg = document.getElementById("msg");
+        // var xhr = new XMLHttpRequest();
+    
+        // xhr.onreadystatechange = function(){
+        //     if(this.readyState == 4 && this.status == 200){
+        //         console.log(this.response);
+    
+        //         var res = this.response;
+        //         popup.style.display= "table";
+        //         msg.innerHTML =res.msg;
+    
+    
+        //     }else if(this.readyState== 4){
+        //         console.log(this);
+        //         popup.style.display= "table";
+        //         msg.innerHTML = "une erreur est survenu...";
+    
+        //     }
+        // };
+    
+        // xhr.open("POST", "php_acces/script_reservation.php", true);
+        // xhr.responseType ="json";
+        // // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        // xhr.send(data);
+    
+        return false;
+    
+    });
+    
