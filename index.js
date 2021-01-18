@@ -49,6 +49,17 @@ checker2.addEventListener('click',function(event){
 
 });
 
+let checker3 = document.getElementById("checker3");
+
+checker3.addEventListener('click',function(event){
+    
+    let msg = document.getElementById("msg");
+    event.stopPropagation();
+    let popup = document.getElementsByClassName('popup')[2];
+    popup.style.display= "none";
+    msg.innerHTML="";
+
+});
 // formulaire reservation
 let forme = document.getElementById("reservation");
 
@@ -108,6 +119,16 @@ link.addEventListener("click", function(event){
 
 });
 
+let link2 = document.getElementById("button_affiche_menu");
+
+link2.addEventListener("click", function(event){
+    event.preventDefault();
+
+    
+    let popup = document.getElementsByClassName('popup')[2]; // modifier avant verification final 
+    popup.style.display= "table";
+
+});
 
 
 // commande select plat
@@ -127,10 +148,10 @@ function color(id){
 }
 
 
-function trans_action(val,table=tab){
+function trans_action(val,resert="on",table=tab){
 
     // selection
-
+    var echor = document.getElementById("medic"+val);
     let boole = false;
     let index=0;
     for(var i=0; i<table.length; i++) {
@@ -186,8 +207,18 @@ function trans_action(val,table=tab){
             }
 
 
+            if(resert == "on"){
 
-            varix.innerHTML =int(total);
+                varix.innerHTML = parseInt(total);
+                if(echor.style.display == "block"){
+                    echor.style.display = "none";
+                }else{
+                    echor.style.display = "block";
+                }
+            }else {
+                varix.innerHTML =0;
+
+            }
 
             // console.log(prix_val);
 
@@ -343,13 +374,14 @@ form2.addEventListener("submit",function(event){
                 
                 prev.style="color:#949494; border: 3px solid #949494;"
                 nex.style="color:#ff6633; border: 3px solid #ff6633;"
-                let varix = document.getElementById("result");
                 title.innerHTML="Menu";
                 indexor.style.display = "block";
                 indexor1.style.display = "none";
+
                 tab=[];
-                trans_action(0,table=tab);
-                tab=[];
+                trans_action(0,0);
+ 
+
 
             }
 
