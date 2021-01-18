@@ -666,7 +666,7 @@ padding:100px 10%;
 
     border-radius: 5px;
 }
-.operated:hover, .activated_operator{
+.operated:hover{
     background-color: #ff6633ec;
     color: #fff;
     transition: all 0.3s;
@@ -677,11 +677,7 @@ padding:100px 10%;
     border-right: 1px solid #ffffff;
 
 }
-#ver2 .activated_operator .menu_center{
-    border-left: 2px solid #ffffff;
-    border-right: 1px solid #ffffff;
 
-}
 
 #ver1 .menu_elt p,#ver2 .menu_elt p{
 padding: 0px 0px;
@@ -1006,3 +1002,95 @@ margin: 0;
 
 
 
+
+
+/* new popup*/
+
+.affiche_menu_principale_liste{
+    width: 70%;
+    height: 90vh;
+    position: relative;
+    overflow: auto;
+    max-width: 900px;
+
+}
+
+.affiche_menu_principale_liste label[for="checker3"]{
+    display: block;
+    position:absolute;
+    width: 97%;
+    margin-top: 10px;
+    max-width: 870px;
+
+}
+
+@media(max-width: 1000px){
+    .affiche_menu_principale_liste{
+        width: 90%;
+    
+    }
+    
+    .affiche_menu_principale_liste label[for="checker3"]{
+        width:95%;
+    
+    }
+}
+
+
+#checker3{
+    display:none;
+}
+
+.affiche_menu_principale_liste .menu_elt{
+    width: 94%;
+    margin: 20px 3%;
+
+    
+}
+.affiche_menu_principale_liste .menu_elt p{
+    margin: 0;
+    padding: 0;
+
+}
+
+.affiche_menu_principale_liste .menu_elt >p{
+    text-align: left;
+}
+
+.affiche_menu_principale_liste .fact_menu2{
+    height: 80%;
+}
+
+.affiche_menu_principale_liste .fact_menu2 h2{
+    text-align: left;
+    color: #ff9966;
+    width: 70%;
+    padding:0 15%;
+}
+
+.affiche_menu_principale_liste .menu_elt .menu_center h3{
+    padding-top: 20px;
+    font-size:1.3em;
+    
+}
+
+
+@media(max-width: 300px){
+
+    .affiche_menu_principale_liste .menu_elt .menu_center h3{
+        padding-top: 20px;
+        font-size:1.2em;
+        
+    }
+    .affiche_menu_principale_liste .menu_elt{
+        width: 100%;
+        margin: 20px 0;
+    
+        
+    }
+    
+}
+ .popup .ppp{
+    display:none;
+    text-align: right;
+}

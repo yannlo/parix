@@ -74,7 +74,7 @@
                     elit. Magni nisi perferendis veniam dolor architecto exercitationem doloribus
                     voluptas nihil dolore! Impedit at voluptas adipisci aspernatur natus. 
                     Ea magnam suscipit placeat nostrum?
-                    <a href="#" class="button">Telecharger le menu complet</a>
+                    <a href="#" class="button" id="button_affiche_menu">Afficher le menu complet</a>
 
                 </p>
             </div>
@@ -234,7 +234,7 @@
                                 $bdd = new PDO('mysql:host=localhost;dbname=parixproject','yannlo','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
                                 $get_categorie = $bdd-> query('SELECT * FROM categorieplat ORDER BY id');
-
+                                
                                 while ($categorie = $get_categorie -> fetch()){
 
                                 ?>
@@ -257,19 +257,16 @@
 
 
 
-                                <div class="menu_elt operated" id="meo<?php echo($plat["id"] ); ?>"  onclick='let prix_val = trans_action(<?php echo($plat["id"] ); ?>);'>
+                                <div class="menu_elt" id="meo<?php echo($plat["id"] ); ?>"  onclick='let prix_val = trans_action(<?php echo($plat["id"] ); ?>);'>
                                 
                                 <p >
                                         <img src="images/plats/<?php echo($plat["photoPlat"] ); ?>" alt=""/>
                                         <input type="hidden" value="<?php echo($plat["id"] ); ?>" />
                                     </p>
                             
-                                    <div class="menu_center" >
+                                    <div class="menu_center" id="ppp<?php echo($plat["id"] ); ?>"  >
                                         <h3><?php echo($plat["nomPlat"] ); ?></h3>
-                                        <!-- <p class="ppp" id="ppp<?php echo($plat["id"] ); ?>">
-                                            <label for="quantite<?php echo($plat["id"] ); ?>">Quantité :</label>
-                                            <input type="number" min="1" max= "20" name="quantite" value="1"  />
-                                        </p> -->
+                                        <p class="ppp" style="text-align:right;width:90%;" id="medic<?php echo($plat["id"]); ?>" ><label style="font-size:1.5em; color:#ff6633;"><i class="fas fa-check-circle"></i></label></p>
 
                                     </div>
                             
@@ -286,6 +283,7 @@
 
                                                                 
                                 <?php
+                                
                                     }
                                 ?>                                
                             </div>
@@ -360,6 +358,92 @@
                     </div>
        
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup">
+
+        <div class="content">
+
+            <div class="form affiche_menu_principale_liste">
+
+                <label for="checker3">
+                    <i class="fas fa-times" ></i>
+                </label>
+
+                <input type="checkbox" id="checker3" />
+
+                <h2>Menu</h2>
+                <div class="fact_menu2">
+
+                            
+                    <?php 
+
+                    $bdd = new PDO('mysql:host=localhost;dbname=parixproject','yannlo','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
+                    $get_categorie = $bdd-> query('SELECT * FROM categorieplat ORDER BY id');
+
+                    while ($categorie = $get_categorie -> fetch()){
+
+                    ?>
+
+
+
+                    <div class='group_plat'>
+                    <h2><?php echo($categorie["nomCategorie"] ); ?></h2>
+
+                    <?php
+
+                    $get_plat = $bdd -> prepare("SELECT * FROM menu WHERE idCategoriePlat = :idCategoriePlat ORDER BY nomPlat");
+
+                    $get_plat -> execute(array(
+                        "idCategoriePlat" => $categorie["id"]
+                    ));
+
+                    while ($plat = $get_plat -> fetch()){
+                    ?>
+
+
+
+                    <div class="menu_elt" id="meo<?php echo($plat["id"] ); ?>"  onclick='let prix_val = trans_action(<?php echo($plat["id"] ); ?>);'>
+
+                    <p >
+                            <img src="images/plats/<?php echo($plat["photoPlat"] ); ?>" alt=""/>
+                            <input type="hidden" value="<?php echo($plat["id"] ); ?>" />
+                        </p>
+
+                        <div class="menu_center" >
+                            <h3><?php echo($plat["nomPlat"] ); ?></h3>
+
+                        </div>
+
+                        <table>
+                            <tr>
+                                <th>prix</th>
+                            </tr>
+                            <tr>
+                                <td><?php echo($plat["prix"] ); ?> fcfa</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                                                    
+                    <?php
+                        }
+                    ?>                                
+                    </div>
+
+                    <?php
+                    }
+                    ?>
+
+
+                    </div>
+
+
+
             </div>
         </div>
     </div>
