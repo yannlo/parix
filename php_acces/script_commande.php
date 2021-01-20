@@ -37,7 +37,7 @@ if (!empty($_POST["var"])) {
             
             <div class="menu_center" >
             <h3>'.$plat["nomPlat"].'</h3>
-            <p class="ppp" id="ppp'.$plat["id"].'">
+            <p>
             <label for="quantite'.$plat["id"].'">Quantité :</label>
             <input type="number" min="1" max= "20" name="quantite" value="'.$var[$i][1].'" id="quantite'.$plat["id"].'" onchange="multiplication(\''.$plat["id"].'\',\'quantite'.$plat["id"].'\');" />
             </p>

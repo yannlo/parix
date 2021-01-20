@@ -1,158 +1,150 @@
 <?php
-    include('admin/function/connexion_bdd.php');
+    include('function/connexion_bdd.php');
+    include('function/verified_session.php');
+    include('function/acces_admin_verification.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Parix - Côte d'Ivoire</title>
+        <title>Reservation - Parix</title>
         <link rel="shortcut icon" href="#" type="image/x-icon">
+        <link rel="stylesheet" href="../style.css" type="text/css" />
         <link rel="stylesheet" href="style.css" type="text/css" />
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
     </head>
     <body>
-        <header>
-            <nav class="navBar">
-
-                <input type="checkbox" id="check">
-
-                <label for="check" class="checkbtn">
-
-                    <i class="fas fa-bars" id="icon"></i>
-
-                </label>
-
-                <label for="logo"><img src="images/logo.png" alt="logo parix"></label>
-
-                <ul>
-                    <li> <a class="active" href="#">HOME</a></li>
-                    <li> <a href="#menu">MENU</a></li>
-                    <li> <a href="#service">SERVICES</a></li>
-                    <li> <a href="#contacts">CONTACTS</a></li>
-                </ul>
-
-            </nav>
-            <div class="wrapper">
-                <div class="position">
-
-                    <h1>
-                        <span>P</span>arix,<br/>
-                        Le restaurant Convivial par excellence
-                    </h1>
-                </div>
-            </div>
-
-
-        </header>
+        <?php include("header.php"); ?>
 
         <div class="center">
+            <section id="reserved">
+                <h1>Réservation</h1>
+                <div class="group">
+                    <h2>Aujourd'hui</h2>
+                    <div id="today">
+                    <?php 
+                        $get_reservation_to_date = $bdd-> prepare("SELECT * FROM reservation WHERE date_reservation = :val1  ORDER BY heure DESC ");
+                        $get_reservation_to_date->execute(array(
+                            "val1"=> date('y-m-d')
+                        ));
 
-            <section id="menu">
-                <h1>Menu</h1>
-                <div class="parti n1">
-                    <p class="elt1">
-                        <img src="images/plats/steak.jpeg" alt="plat de frite et steak"/>
-                    </p>
-                    <p class="elt2">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur,
-                        rerum unde deleniti quaerat quis iste incidunt quibusdam dolor aut nemo
-                        mollitia obcaecati inventore corrupti, qui architecto explicabo ut. 
-                        Repudiandae, numquam. Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Magni nisi perferendis veniam dolor architecto exercitationem doloribus
-                        voluptas nihil dolore! Impedit at voluptas adipisci aspernatur natus. 
-                        Ea magnam suscipit placeat nostrum? 
-                    </p>
-                </div>
-                <div class="parti n2">
-                    <p class="elt1">
-                        <img src="images/plats/glace.jpeg" alt="plat de frite et steak"/>
-                    </p>
-                    <p class="elt2">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur,
-                        rerum unde deleniti quaerat quis iste incidunt quibusdam dolor aut nemo
-                        mollitia obcaecati inventore corrupti, qui architecto explicabo ut. 
-                        Repudiandae, numquam. Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Magni nisi perferendis veniam dolor architecto exercitationem doloribus
-                        voluptas nihil dolore! Impedit at voluptas adipisci aspernatur natus. 
-                        Ea magnam suscipit placeat nostrum?
-                        <a href="#" class="button" id="button_affiche_menu">Afficher le menu complet</a>
+                        while ($row = $get_reservation_to_date->fetch()){
+                    ?>
 
-                    </p>
-                </div>
-            </section>
 
-            <section id="service">
-                <h1>Services</h1>
-                <div class="parti">
-                    <div class="part  av1">
-                        <h2>Reservation</h2>
-                        <form id="reservation">
-                            <p> 
-                                <label for="nomComplet">Entrer votre nom complet:  **</label>
-                                <input type="text" id="nomComplet" name="nomComplet" />
-                            </p>
-                            <p>
-                                <label for="date">Entrer la date et l'heure de la reservation:  **</label>
-                                <div class="block">
-                                    <input type="date" id="date" name="date"/>
-                                    <input type="time" name="heure" min="10:00" max="22:00"  placeholder=" Entrer votre nom complet"/>
-                                </div>
-                            </p>
-                            <p> 
-                                <label for="contact">Entrer votre numéro de telephone:  **</label>
-                                <input type="tel" id="contact" name="contact" placeholder="01 02 03 04" format="XX XX XX XX" />
-                            </p>
-                            <p> 
-                                <label for="message">Entrer une note de préparation: (Optionnel)</label><br/>
-                                <textarea id="message" name="message"></textarea>
-                            </p>
-                            <input type="submit" value="envoyer" class="button" />
-        
-                        </form>
+                                            <div class="info_reserved">
+                                                <h3 >Nom du client: </h3>
+                                                <p class="nom"><?php echo($row['nomComplet']);?></p>
+                                                <h3 >Heure: </h3>
+                                                <p class="date"><?php echo($row['heure']);?></p>
+                                                <h3 >Contact: </h3>
+                                                <p class="contact"><?php echo($row['contact']);?></p>
+                    <?php 
+                    if($row['messages']!== NULL){
+
+                    ?>
+                                                <h3 >message: </h3>
+                                                <p class="message"><?php echo($row['messages']);?></p>
+                                            
+                    <?php
+                    };?>
                     </div>
-                    <div class="part av2">
-                        <h2>Commande en ligne</h2>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur,
-                            rerum unde deleniti quaerat quis iste incidunt quibusdam dolor aut nemo
-                            mollitia obcaecati inventore corrupti, qui architecto explicabo ut. 
-                            Repudiandae, numquam. Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Magni nisi perferendis veniam dolor architecto exercitationem doloribus
-                            voluptas nihil dolore! Impedit at voluptas adipisci aspernatur natus. 
-                            Ea magnam suscipit placeat nostrum?
-                            <a href="#" id="commandeLink" class="button">Commander</a>
-        
-                        </p>
+                    <?php
+                        }
+
+                    ?>
 
                     </div>
                 </div>
-            </section>
 
-            <section id="contacts">
-                <h1>Contact</h1>
-                <div class="parti">
-                    <div class="cont_elemnt">
-                        <div id="element">
-                            <div class="blocked">
-                                <h2>Adresse</h2>
-                                <h3>Abidjan, Boulevar de Marseille</h3>
-                            </div>
-                            <div class="blocked">
-                                <h2>Telephone</h2>
-                                <h3>01 02 03 04</h3>
-                                <h3>01 02 02 04</h3>
-                            </div>
-                            <div class="blocked">
-                                <h2>Email</h2>
-                                <h3>parix@restaurant.com</h3>
-                            </div>
-                        </div>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.882471263215!2d-3.985651584674635!3d5.2810259378211875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1eeb410f40961%3A0xa41861ea4418cf06!2sBoulevard%20de%20Marseille%2C%20Abidjan%2C%20C%C3%B4te%20d&#39;Ivoire!5e0!3m2!1sfr!2sfr!4v1610674295633!5m2!1sfr!2sfr" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                <div class="group">
+                    <?php 
+                        $get_reservation_to_date = $bdd-> prepare("SELECT * FROM reservation WHERE date_reservation > :val1  ORDER BY heure DESC ");
+                        $get_reservation_to_date->execute(array(
+                            "val1"=> date('y-m-d')
+                        ));
+
+                        while ($row = $get_reservation_to_date->fetch()){
+                            $date1 = preg_replace('#([0-9]{4})-([0-9]{2})-([0-9]{2})#',"$2",$row['date_reservation']);
+                            $date2 = preg_replace('#([0-9]{4})-([0-9]{2})-([0-9]{2})#',"$1",$row['date_reservation']);
+                            $date3 = preg_replace('#([0-9]{4})-([0-9]{2})-([0-9]{2})#',"$3",$row['date_reservation']);
+
+                            switch ($date1) {
+                                case '1':
+                                    $date = " $date3 Janvier $date2";
+                                    break;
+                                case '2':
+                                    $date = " $date3 Fevrier $date2";
+                                    break;
+                                case '3':
+                                    $date = " $date3 Mars $date2";
+                                    break;
+                                case '4':
+                                    $date = " $date3 Avril $date2";
+                                    break;
+                                case '5':
+                                    $date = " $date3 Mai $date2";
+                                    break;
+                                case '6':
+                                    $date = " $date3 Juin $date2";
+                                    break;
+                                case '7':
+                                    $date = " $date3 Juillet $date2";
+                                    break;
+                                case '8':
+                                    $date = " $date3 Aout $date2";
+                                    break;
+                                case '9':
+                                    $date = " $date3 Septembre $date2";  
+                                    break;
+                                case '10':
+                                    $date = " $date3 Octobre $date2";
+                                    break;
+                                case '11':
+                                    $date = " $date3 Novembre $date2";
+                                    break;
+                                case '12':
+                                    $date = " $date3 Decembre $date2";
+                                    break;
+                                
+                                default:
+                                    $date = preg_replace('#([0-9]{4})-([0-9]{2})-([0-9]{2})#',"$3 $2 $1",$row['date_reservation']);
+
+                                    break;
+                            }
+                    ?>
+                    <h2><?php echo($date);?></h2>
+                    <div id="next">
+
+
+                                            <div class="info_reserved">
+                                                <h3 >Nom du client: </h3>
+                                                <p class="nom"><?php echo($row['nomComplet']);?></p>
+                                                <h3 >Heure: </h3>
+                                                <p class="date"><?php echo($row['heure']);?></p>
+                                                <h3 >Contact: </h3>
+                                                <p class="contact"><?php echo($row['contact']);?></p>
+                    <?php 
+                    if($row['messages']!== NULL){
+
+                    ?>
+                                                <h3 >message: </h3>
+                                                <p class="message"><?php echo($row['messages']);?></p>
+                                            
+                    <?php
+                    };?>
                     </div>
+                    <?php
+                        }
 
+                    ?>
+
+                    </div>
                 </div>
+
             </section>
 
         </div>
@@ -177,7 +169,7 @@
             <p id="copyright">Copyright © 2021 School Project All Rights Reserved</p>
         </footer>
 
-        <div class="popup">
+        <!-- <div class="popup">
             <div class="content">
                 <div class="form validation_msg">
                     <label for="checker1">
@@ -447,9 +439,9 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <script type="text/javascript" src="index.js">
+        <script type="text/javascript" src="../index.js">
 
 
         </script>

@@ -14,42 +14,50 @@ if(!empty($_POST["nomComplet"]) AND !empty($_POST["date"]) AND !empty($_POST["he
     $contact = htmlspecialchars($_POST["contact"]);
 
     if(strlen($_POST["nomComplet"]) < 60){
-        
-        if (empty($_POST["message"])){
+
+        if($date > date("Y-m-d")){
+
+            if (empty($_POST["message"])){
 
 
-            $request = $bdd -> prepare("INSERT INTO reservation (nomComplet,date_reservation,heure,contact) VALUES (:nomComplet, :date_reservation, :heure, :contact ) ");
-            $request -> execute(array(
-    
-                "nomComplet" => $nomComplet,
-                "date_reservation" => $date,
-                "heure" => $heure,
-                "contact" => $contact
-            ));
-            
-            $msg="Votre reservation a bien été prise en compte";
-    
-    
-            
-    
-    
-            }else if (!empty($_POST["message"])){
-
-                $message=htmlspecialchars($_POST["message"]);
-
-                $request = $bdd -> prepare("INSERT INTO reservation (nomComplet,date_reservation,heure,contact, messages) VALUES (:nomComplet, :date_reservation, :heure, :contact, :messages) ");
+                $request = $bdd -> prepare("INSERT INTO reservation (nomComplet,date_reservation,heure,contact) VALUES (:nomComplet, :date_reservation, :heure, :contact ) ");
                 $request -> execute(array(
         
                     "nomComplet" => $nomComplet,
                     "date_reservation" => $date,
                     "heure" => $heure,
-                    "contact" => $contact,
-                    "messages" => $message
+                    "contact" => $contact
                 ));
-
                 
-                $msg="Votre reservation a bien été prise en compte <br/>Le message a bien été envoyer";
+                $msg="Votre reservation a bien été prise en compte";
+        
+        
+                
+        
+        
+                }else if (!empty($_POST["message"])){
+    
+                    $message=htmlspecialchars($_POST["message"]);
+    
+                    $request = $bdd -> prepare("INSERT INTO reservation (nomComplet,date_reservation,heure,contact, messages) VALUES (:nomComplet, :date_reservation, :heure, :contact, :messages) ");
+                    $request -> execute(array(
+            
+                        "nomComplet" => $nomComplet,
+                        "date_reservation" => $date,
+                        "heure" => $heure,
+                        "contact" => $contact,
+                        "messages" => $message
+                    ));
+    
+                    
+                    $msg="Votre reservation a bien été prise en compte <br/>Le message a bien été envoyer";
             }
+
+        }else {
+            $msg="La date saisie est anterieur a celle d'aujourd'hui";
+        }
+        
+
 
 
 
@@ -68,7 +76,7 @@ if(!empty($_POST["nomComplet"]) AND !empty($_POST["date"]) AND !empty($_POST["he
 
 
 
-$res=["success"=> $success, "msg"=> $msg, "message"=>$message];
+$res=["success"=> $success, "msg"=> $msg];
 
 echo(json_encode($res));
 

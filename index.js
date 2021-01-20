@@ -44,6 +44,15 @@ checker2.addEventListener('click',function(event){
     let msg = document.getElementById("msg");
     event.stopPropagation();
     let popup = document.getElementsByClassName('popup')[1];
+
+
+    console.log(tab);
+    for (let i; i<tab.length; i++){
+        let checker_circles = document.getElementById("medic"+tab[i][0]);
+        checker_circles.style.display = "none";
+    }
+
+
     popup.style.display= "none";
     msg.innerHTML="";
 
@@ -56,6 +65,7 @@ checker3.addEventListener('click',function(event){
     let msg = document.getElementById("msg");
     event.stopPropagation();
     let popup = document.getElementsByClassName('popup')[2];
+
     popup.style.display= "none";
     msg.innerHTML="";
 

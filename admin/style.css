@@ -1,0 +1,191 @@
+#font_header .wrapper{
+    display: table;
+    width: 100%;
+    margin: 0;
+    height: 90%;
+    transition: .5s;
+}
+#font_header .wrapper .position{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color:#fff;
+}
+
+.formulaire_connexion{
+    width: 60%;
+    margin:0 25%;
+    padding:50px 10px;
+    max-width: 500px;
+    background-color:rgba(230, 230, 230, 0.952);
+    border-radius: 10px;
+    box-shadow: 7px 7px 20px rgb(5, 5, 5);
+}
+
+
+
+.formulaire_connexion h1{
+    background:none;
+    color:#ff6633;
+}
+
+.formulaire_connexion form p{
+    font-size:1.3em;
+    width:100%;
+    margin: 20px 0;
+    color: #000;
+}
+.formulaire_connexion form p input{
+    display: block;
+    padding: 5px;
+    font-size:1em;
+    width: 80%;
+    margin: 5px 10%;
+    border-radius: 4px;
+    border:0px;
+    background-color: rgb(187, 187, 187);
+    color: #fff;
+    text-align: center;
+
+}
+
+.formulaire_connexion .button{
+    margin-bottom: 0;
+    width: 80%;
+    margin: 40px 10% 20px 10%;
+    max-width: auto;
+    background-color: #ff9966;
+    color: #fff;
+
+}
+
+.formulaire_connexion .button:hover{
+    background-color: #ff6633;
+
+}
+
+@media(max-width: 700px){
+    .formulaire_connexion{
+        width: 80%;
+        margin:0 5%;
+        padding:5%;
+        max-width: auto;
+    }
+}
+
+@media(max-width:400px){
+    .formulaire_connexion{
+        width: 92%;
+        margin:0 2%;
+        padding:2%;
+
+    }
+}
+
+
+/* reservation page style */
+
+#section_ad_header{
+    height: 80px;
+    background: none;
+}
+
+
+#section_ad_header .navBar{
+    background-color: rgb(59, 59, 59);
+}
+
+
+#disconnected{
+
+    font-size:1.4em;
+
+}
+
+
+li#discon {
+    margin-left: 100px;
+    
+}
+
+@media (max-width: 885px){
+    #disconnected{
+        
+
+        font-size:1.7em;
+    
+    }
+    li#discon {
+        margin-left: auto;
+    }
+
+    section#reserved {
+        width: 90%;
+        padding: 20px 5% 0 5%;
+
+        
+    }
+
+    
+}
+
+#reserved{
+    width: 70%;
+    padding:20px 15% 70px 15%;
+}
+
+
+#reserved h2{
+    color: #ff6633;
+    font-size:1.7em;
+    width: 80%;
+    padding: 20px 10%;
+}
+
+#reserved #today{
+    display: grid;
+    grid-gap:30px;
+    grid-template-columns: 1fr;
+}
+
+#reserved .info_reserved{
+    border-radius: 5px;
+    min-height: 100px;
+    background-color: #e6e6e6;
+    width: 92%;
+    padding: 20px 4%;
+    display:grid;
+   grid-row-gap: 20px;
+   grid-column-gap: 10px;
+    grid-template-columns: 2fr 7fr;
+}
+#reserved .info_reserved:hover{
+    box-shadow: 5px 5px 15px #adadad;
+    transition: all 0.3s;
+}
+
+#reserved .info_reserved p{
+    font-size: 1.1em;
+    text-align: justify;
+}
+
+
+
+#reserved .info_reserved .message{
+    grid-row: 5 /span 5;
+    grid-column:1/span 2;
+}
+
+#reserved .info_reserved h3{
+    font-size: 1.4em;
+    color: #ff9966;
+}
+
+@media (max-width: 350px){
+    #reserved .info_reserved h3{
+        font-size: 1.3em;
+    }
+    #reserved .info_reserved p{
+        font-size: 1em;
+    }
+}
