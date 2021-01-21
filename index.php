@@ -381,7 +381,7 @@
                                 
                         <?php 
 
-                        $bdd = new PDO('mysql:host=localhost;dbname=parixproject','yannlo','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                        
 
                         $get_categorie = $bdd-> query('SELECT * FROM categorieplat ORDER BY id');
 

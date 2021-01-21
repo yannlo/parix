@@ -263,7 +263,7 @@ function multiplication (val,quant,table=tab ,prix_valeur = prix_val){
     for(var i=0; i<table.length; i++) {
         if(val == table[i][0]) {
             // console.log(quant_elt.value);
-            table[i][1] = quant_elt.value;
+            table[i][1] =  parseInt(quant_elt.value);
             total += parseInt(prix_valeur[i]) * table[i][1];
         }else{
             total += parseInt(prix_valeur[i]) * table[i][1];

@@ -1,7 +1,7 @@
 <?php
 
 
-$bdd = new PDO('mysql:host=localhost;dbname=parixproject','yannlo','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+include('../admin/function/connexion_bdd.php');
 
 $success = 0;
 $msg = '';
@@ -9,6 +9,8 @@ if(!empty($_POST["table"]) AND count(json_decode($_POST["table"])) != 0 ){
     
 
     $table =$_POST["table"];
+
+
 
     // echo("tableau no vide \n");
 
@@ -21,14 +23,19 @@ if(!empty($_POST["table"]) AND count(json_decode($_POST["table"])) != 0 ){
         
         // echo("formulaire correctement saisie \n");
         
-        $add_command = $bdd -> prepare("INSERT INTO comande (commande,nomClient,numeroClient,adresseClient,idOptionPaiement, idEtatCommande) VALUES (:commande, :nomClient, :numeroClient, :adresseClient, :idOptionPaiement,  :idEtatCommande ) ");
+        // foreach ($table as $key) {
+        //     $key[1] = (int) $key[1];
+        // }
+        
+        $add_command = $bdd -> prepare("INSERT INTO comande (commande,nomClient,numeroClient,adresseClient,idOptionPaiement, idEtatCommande,date_commande) VALUES (:commande, :nomClient, :numeroClient, :adresseClient, :idOptionPaiement,  :idEtatCommande,:date_commande) ");
         $add_command -> execute(array(
             "commande"=>$table,
             "nomClient"=> $nom,
             "numeroClient"=> $phone,
             "adresseClient"=> $adresse,
             "idOptionPaiement"=> $paiement,
-            "idEtatCommande"=> 0
+            "idEtatCommande"=> 1,
+            "date_commande"=>date("Y-m-d")
         ));
 
 

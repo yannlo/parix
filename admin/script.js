@@ -1,4 +1,12 @@
+console.log("script 1");
 
+// script annulation / validation commande
+
+
+
+
+
+// chech code
 let checker1 = document.getElementById("checker1");
 
 checker1.addEventListener('click',function(event){
@@ -12,4 +20,6 @@ checker1.addEventListener('click',function(event){
     msg.innerHTML="";
 
 });
+
+
 

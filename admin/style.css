@@ -119,34 +119,28 @@ li#discon {
         margin-left: auto;
     }
 
-    section#reserved {
+    section#reserved, section#commande {
         width: 90%;
         padding: 20px 5% 0 5%;
 
         
     }
-
     
 }
 
-#reserved{
+#reserved, #commande{
     width: 70%;
     padding:20px 15% 70px 15%;
 }
 
 
-#reserved h2{
+#reserved h2, #commande h2{
     color: #ff6633;
     font-size:1.7em;
     width: 80%;
     padding: 20px 10%;
 }
 
-#reserved #today{
-    display: grid;
-    grid-gap:30px;
-    grid-template-columns: 1fr;
-}
 
 #reserved .info_reserved{
     border-radius: 5px;
@@ -154,6 +148,7 @@ li#discon {
     background-color: #e6e6e6;
     width: 92%;
     padding: 20px 4%;
+    margin-bottom: 20px;
     display:grid;
    grid-row-gap: 20px;
    grid-column-gap: 10px;
@@ -188,4 +183,209 @@ li#discon {
     #reserved .info_reserved p{
         font-size: 1em;
     }
+}
+
+#id_footer{
+    min-height:200px;
+}
+
+#div_footer{
+    width: 75%;
+    padding: 30px 10%;
+    min-height:150px;
+}
+#div_footer h2{
+    padding: 10px 0 10px 5%;
+
+}
+#div_footer p{
+    text-align: justify;
+}
+
+
+/* commande */
+
+
+#commande .commande_list{
+    margin:0;
+    padding: 0 1%;
+    background-color: rgb(245, 245, 245);
+    margin-bottom: 100px;
+    width: 98%;
+    border-radius: 5px;
+    
+}
+
+#commande table{
+
+    width: 100%;
+}
+#commande table,#commande tr,#commande td ,#commande th{
+    padding: 5px;
+    border-collapse: collapse;
+    border: 3px solid rgb(245, 245, 245);
+}
+
+#commande table th{
+    background-color: #ff6633;
+    color: #fff;
+    font-size:1.1em;
+}
+
+#commande table tr:nth-child(even){
+    background-color: #ff9966;
+    color: rgb(255, 255, 255);
+
+}
+#commande table tr:nth-child(odd){
+    background-color: #dbdbdb;
+}
+
+#commande table tr{
+    text-align:center;
+    font-size:1.1em;
+}
+
+@media(max-width:400px){
+    #commande table tr{
+        font-size:0.9em;
+    }
+    #commande .commande_list h2 {
+        font-size: 1.6em;
+    }
+    
+    #commande .infoclient h3 {
+        font-size: 1.2em;
+    }
+    #commande .infoclient h3 span{
+        display:block;
+    }
+}
+#commande table tr.total{
+border-top: 10px solid rgb(245, 245, 245);
+
+}
+#commande table tr.number_com{
+border-bottom: 5px solid rgb(245, 245, 245);
+
+}
+
+
+.etat_commande{
+    display:flex;
+    width: 100%;
+}
+
+.etat_commande .button{
+    min-width: auto;
+    max-width: 300px;
+    width: 90%;
+    margin: 30px auto 10px auto;
+}
+
+
+#commande h2 {
+    padding-top: 0;
+    font-size: 2em;
+}
+
+#commande .commande_list h2 {
+    color: #ff9966;
+    padding:30px 2% 10px 2%;
+    font-size: 1.8em;
+}
+
+#commande .infoclient h3 {
+    padding:5px 2% 10px 2%;
+    font-size: 1.4em;
+    color: #ff8d53;
+}
+
+#commande .infoclient h3 span{
+    color: #464646;
+}
+#commande{
+    max-width:1000px;
+}
+
+section#menu{
+    padding-top: 30px;
+    width: 70%;
+    max-width: 1000px;
+    margin: 0px 15%  50px 15%;
+}
+
+section#menu h2{
+    color: #ff6633;
+    margin: 20px 0 5px  10%;
+    font-size: 1.6em;
+}
+
+section#menu table,section#menu table th, section#menu table td{
+background: none;
+color: #000;
+}
+
+section#menu h3{
+    padding-top: 10px;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+
+@media(max-width: 900px){
+
+    section#menu{
+        width: 90%;
+        margin: 0px 5%  50px 5%;
+    }
+
+}
+
+.popup .fact_menu2 form label {
+    position: relative;
+    text-align: center;
+    font-size:1em;
+}
+
+.popup .fact_menu2 form .button{
+    max-width: 300px;
+}
+.popup .fact_menu2 form p input {
+    display: block;
+    position: relative;
+    text-align: center;
+    font-size:1em;
+    margin: 0 auto;
+    background-color:#9c9b9b;
+    border:none;
+    border-radius: 5px;
+    margin-top: 5px;
+    color:#FFF;
+    padding:3px;
+    width: 70%;
+}
+
+.popup .fact_menu2 form p input[type="radio"]{
+    display: inline-block;
+    margin: 10px 10px 10px 0;
+    width: 20px;
+
+}
+
+.popup .fact_menu2 form p .select_label{
+
+    width: 70%;
+    margin: 10px auto;
+    text-align: left;
+    max-width: 350px;
+
+}
+
+
+
+.popup .fact_menu2 form img{
+    width: 70%;
+    margin:10px 0;
+    max-width: 300px;
 }

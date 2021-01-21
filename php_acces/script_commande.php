@@ -3,7 +3,8 @@
 
 
 
-$bdd = new PDO('mysql:host=localhost;dbname=parixproject','yannlo','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+include('../admin/function/connexion_bdd.php');
+
 
 if (!empty($_POST["var"])) {
     # code...

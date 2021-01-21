@@ -1,6 +1,6 @@
 <?php
 
-$bdd = new PDO('mysql:host=localhost;dbname=parixproject','yannlo','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+include('../admin/function/connexion_bdd.php');
 
 $message="";
 $success = 0;
@@ -15,7 +15,7 @@ if(!empty($_POST["nomComplet"]) AND !empty($_POST["date"]) AND !empty($_POST["he
 
     if(strlen($_POST["nomComplet"]) < 60){
 
-        if($date > date("Y-m-d")){
+        if($date >= date("Y-m-d")){
 
             if (empty($_POST["message"])){
 

@@ -1,5 +1,12 @@
 <?php
 include('function/connexion_bdd.php');
+include('function/verified_session.php');
+
+if(isset($_SESSION['session_validation']) AND $_SESSION['session_validation'] =="on"){
+    header('Location: reservation.php');
+    exit();
+}
+
 
 $error ='test';
 $result=0;
