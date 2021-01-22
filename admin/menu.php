@@ -2,7 +2,7 @@
     include('function/verified_session.php');
     include('function/acces_admin_verification.php');
     include('function/connexion_bdd.php');
-
+    $error="";
     if (isset($_FILES) AND isset($_POST["nomPlat"]) AND isset($_POST["prixPlat"]) AND isset($_POST["categorie"])){
         
         if(!empty($_FILES) AND !empty($_POST["nomPlat"]) AND !empty($_POST["prixPlat"]) AND !empty($_POST["categorie"])){
@@ -14,27 +14,27 @@
                 $prix = (int) $_POST["prixPlat"];   
                 $categorie = $_POST["categorie"];
         
-                $add_plat = $bdd -> prepare("INSERT INTO menu (nomPlat, prix, idCategoriePlat) VALUES (:nom, :prix, :categorie)");
-            
-                $add_plat-> execute(array(
-                    "nom" => $nom,
-                    "prix" => $prix,
-                    "categorie"=> $categorie
-                ));
-
-                $id = 0;
-
-                $get_last_plat = $bdd -> query("SELECT * FROM menu ORDER BY id DESC LIMIT 1");
-
-                while ($last_plat = $get_last_plat -> fetch()){
-                    $id = $last_plat["id"];
-                }
-
                 $ext_image = strtolower(substr($image['name'], -3));
                 
                 $allow_ext = array('jpg', 'gif', 'png');
                 
                 if (in_array($ext_image, $allow_ext)) {
+
+                    $add_plat = $bdd -> prepare("INSERT INTO menu (nomPlat, prix, idCategoriePlat) VALUES (:nom, :prix, :categorie)");
+            
+                    $add_plat-> execute(array(
+                        "nom" => $nom,
+                        "prix" => $prix,
+                        "categorie"=> $categorie
+                    ));
+    
+                    $id = 0;
+    
+                    $get_last_plat = $bdd -> query("SELECT * FROM menu ORDER BY id DESC LIMIT 1");
+    
+                    while ($last_plat = $get_last_plat -> fetch()){
+                        $id = $last_plat["id"];
+                    }
                                         
                     $fichier_partiel_nom = str_replace(' ','_',$id);
                     
@@ -47,7 +47,6 @@
                     $add_photoPlat -> execute(array(
                         'photoPlat'=> $fichier_final_nom
                     ));
-        
                 
                 }
             
@@ -63,6 +62,7 @@
             $error ="Veuillez remplir tout les champs";
         }
     }
+
     
 ?>
 <!DOCTYPE html>
@@ -192,14 +192,14 @@
                 </p>
                 <p>
                     <label>Selectionner une categorie:</label>
-<?php
-$get_categorie = $bdd -> query("SELECT * FROM categoriePlat");
-while ($categorie = $get_categorie -> fetch()){
-?>
+                <?php
+                    $get_categorie = $bdd -> query("SELECT * FROM categoriePlat");
+                     while ($categorie = $get_categorie -> fetch()){
+                    ?>
                     <label class="select_label" for="categorie<?php echo $categorie['id'];?>"><input type="radio" name="categorie" id="categorie<?php echo $categorie['id'];?>" value="<?php echo $categorie['id'];?>" required="required" /><?php echo $categorie['nomCategorie'];?></label>
-<?php
-}
-?>
+                    <?php
+                    }
+                    ?>
                     
                 </p>
                 <input type="submit" value="confirmer" class="button"/>
@@ -212,9 +212,98 @@ while ($categorie = $get_categorie -> fetch()){
     </div>
 </div> 
 
+<div class="popup">
+
+    <div class="content">
+
+        <div class="form affiche_menu_principale_liste">
+
+            <label for="checker2">
+                <i class="fas fa-times" ></i>
+            </label>
+
+            <input type="checkbox" id="checker2" />
+            <h2>Selectionner les plats a supprimer</h2>
+            
+            <div class="fact_menu2 version_fact2">
+
+                                
+                <?php 
 
 
-     <!--
+                $get_categorie = $bdd-> query('SELECT * FROM categorieplat ORDER BY id');
+
+                while ($categorie = $get_categorie -> fetch()){
+
+                ?>
+
+
+
+                <div class='group_plat'>
+                <h2><?php echo($categorie["nomCategorie"] ); ?></h2>
+
+                <?php
+
+                $get_plat = $bdd -> prepare("SELECT * FROM menu WHERE idCategoriePlat = :idCategoriePlat ORDER BY nomPlat");
+
+                $get_plat -> execute(array(
+                    "idCategoriePlat" => $categorie["id"]
+                ));
+
+                while ($plat = $get_plat -> fetch()){
+                ?>
+
+
+
+                <div class="menu_elt" id="meo<?php echo($plat["id"] ); ?>"  onclick='let prix_val = trans_action(<?php echo($plat["id"] ); ?>);'>
+
+                <p >
+                        <img src="../images/plats/<?php echo($plat["photoPlat"] ); ?>" alt="photo de <?php echo($plat["nomPlan"] ); ?>"/>
+                        <input type="hidden" value="<?php echo($plat["id"] ); ?>" />
+                    </p>
+
+                    <div class="menu_center" id="ppp<?php echo($plat["id"] ); ?>"  >
+                        <h3><?php echo($plat["nomPlat"] ); ?></h3>
+                        <p class="ppp" style="text-align:right;width:90%;" id="medic<?php echo($plat["id"]); ?>" ><label style="font-size:1.5em; color:#ff6633;"><i class="fas fa-check-circle"></i></label></p>
+
+                    </div>
+
+                    <table>
+                        <tr>
+                            <th>prix</th>
+                        </tr>
+                        <tr>
+                            <td><?php echo($plat["prix"] ); ?> fcfa</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                                                
+                <?php
+
+                    }
+                ?>                                
+                </div>
+
+                <?php
+                }
+                ?>
+
+
+            </div>
+
+            <a href="#" class="button" id="confirmer_suo">Confirmer</a>
+
+            
+            
+
+        </div>
+    </div>
+</div> 
+
+
+<!--
 
         <div class="popup">
             <div class="content">
@@ -403,11 +492,12 @@ while ($categorie = $get_categorie -> fetch()){
             </div>
         </div>
 
-    -->
+-->
 
-        <script type="text/javascript" src="script2.js"></script>
+     <script type="text/javascript" src="script2.js"></script>
         <script>
-            actived_link_page("commande");
+            actived_link_page("menu");
+            <?php echo "console.log($error)" ?>
         </script>
     </body>
 </html>

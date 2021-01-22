@@ -159,21 +159,34 @@ function color(id){
 
 
 function trans_action(val,resert="on",table=tab){
-
-    // selection
     var echor = document.getElementById("medic"+val);
+    // selection
     let boole = false;
     let index=0;
-    for(var i=0; i<table.length; i++) {
-        if(val == table[i][0]) {
-            boole=true;
-            index = i;
+    if (val != 0) {
+        for(var i=0; i<table.length; i++) {
+            if(val == table[i][0]) {
+                boole=true;
+                index = i;
+            }
         }
-    }
-    if(boole){
-        table.splice(index, 1);
+    
+        if(boole){
+            table.splice(index, 1);
+            echor.style.display = "none";
+        }else{
+            table.push([val, 1]);
+            echor.style.display = "block";   
+        } 
     }else{
-        table.push([val, 1])
+
+        for(var i=0; i<table.length; i++) {
+            var echor = document.getElementById("medic"+table[i][0]);
+            echor.style.display = "none";
+
+        }
+        tab=[];
+        table=[];
     }
 
     // console.log(prix_val);
@@ -182,7 +195,12 @@ function trans_action(val,resert="on",table=tab){
     // console.log(JSON.stringify(table));
     data = JSON.stringify(table);
 
+    for(var i=0; i<table.length; i++){
 
+
+        
+    }
+    
     
 
     // traitement 
@@ -220,13 +238,9 @@ function trans_action(val,resert="on",table=tab){
             if(resert == "on"){
 
                 varix.innerHTML = parseInt(total);
-                if(echor.style.display == "block"){
-                    echor.style.display = "none";
-                }else{
-                    echor.style.display = "block";
-                }
+
             }else {
-                varix.innerHTML =0;
+                varix.innerHTML =parseInt(total);
 
             }
 
@@ -259,6 +273,7 @@ function multiplication (val,quant,table=tab ,prix_valeur = prix_val){
     // console.log(table);
 
     // console.log(prix_valeur);
+
 
     for(var i=0; i<table.length; i++) {
         if(val == table[i][0]) {
@@ -388,8 +403,7 @@ form2.addEventListener("submit",function(event){
                 indexor.style.display = "block";
                 indexor1.style.display = "none";
 
-                tab=[];
-                trans_action(0,0);
+                trans_action(0,"on");
  
 
 

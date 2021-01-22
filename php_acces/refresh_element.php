@@ -8,7 +8,7 @@ $text="";
     $date = date("Y-m-d");
 
 
-    $get_commande = $bdd -> query("SELECT * FROM comande WHERE date_commande = '$date' AND idEtatCommande = 1 ORDER BY id DESC");
+    $get_commande = $bdd -> query("SELECT * FROM comande WHERE date_commande = '$date' AND idEtatCommande = 1 ORDER BY id ");
 
     if ($get_commande->rowCount() != 0){
         $text .= "<h2>En cours</h2>";

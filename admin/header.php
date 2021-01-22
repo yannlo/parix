@@ -39,7 +39,7 @@
 				console.log('ok');
 				break;
 			case 'menu':
-				link4.setAttribute("class", "active");
+				link3.setAttribute("class", "active");
 				console.log('ok');
 				break;
 		

@@ -24,7 +24,7 @@
 
                 </label>
 
-                <label for="logo"><img src="images/logo.png" alt="logo parix"></label>
+                <label for="logo"><img src="images/logo1.png" alt="logo parix"></label>
 
                 <ul>
                     <li> <a class="active" href="#">HOME</a></li>
@@ -53,7 +53,7 @@
                 <h1>Menu</h1>
                 <div class="parti n1">
                     <p class="elt1">
-                        <img src="images/plats/steak.jpeg" alt="plat de frite et steak"/>
+                        <img src="images/plats/steak.jpg" alt="plat de frite et steak"/>
                     </p>
                     <p class="elt2">
                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur,
@@ -67,7 +67,7 @@
                 </div>
                 <div class="parti n2">
                     <p class="elt1">
-                        <img src="images/plats/glace.jpeg" alt="plat de frite et steak"/>
+                        <img src="images/plats/glace.jpg" alt="plat de frite et steak"/>
                     </p>
                     <p class="elt2">
                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur,

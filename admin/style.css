@@ -274,6 +274,7 @@ border-bottom: 5px solid rgb(245, 245, 245);
 .etat_commande{
     display:flex;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .etat_commande .button{
@@ -281,6 +282,7 @@ border-bottom: 5px solid rgb(245, 245, 245);
     max-width: 300px;
     width: 90%;
     margin: 30px auto 10px auto;
+
 }
 
 
@@ -388,4 +390,29 @@ section#menu h3{
     width: 70%;
     margin:10px 0;
     max-width: 300px;
+}
+
+
+.popup label[for='checker2']{
+    margin-top: 10px;
+    width: 96%;
+}
+
+
+.popup .version_fact2{
+    height: 70%;
+}
+
+@media (min-height: 568px){
+    .popup div.version_fact2{
+        height: 65%;
+    }
+    .popup .fact_menu2{
+        height: 70%;
+    }  
+}
+
+#confirmer_suo{
+    margin: 10px auto;
+
 }
