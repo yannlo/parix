@@ -1,8 +1,9 @@
 <?php 
 
-include("../admin/function/connexion_bdd.php ");
+include("../admin/function/connexion_bdd.php");
 
-print_r($_POST);
+
+// print_r($_POST);
 if(!empty($_POST["submit"]) AND $_POST["action"]){
 
     echo($_POST["id_value"]);

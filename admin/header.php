@@ -9,7 +9,7 @@
 
                 </label>
 
-                <label for="logo"><img src="../images/logo.png" alt="logo parix"></label>
+                <label for="logo"><img src="../images/logo1.png" alt="logo parix"></label>
 
                 <ul>
                     <li> <a href="reservation.php" id="reserved_link">RESERVATIONS</a></li>

@@ -152,352 +152,163 @@
                                 ?>
 
 
-</div>
+                </div>
 
-</section>
-
-</div>
-
-<?php include("footer.php"); ?>
-
-<div class="popup">
-
-    <div class="content">
-
-        <div class="form affiche_menu_principale_liste">
-
-            <label for="checker3">
-                <i class="fas fa-times" ></i>
-            </label>
-
-            <input type="checkbox" id="checker3" />
-            <h2>Formulaire d'ajout de plat</h2>
-            <div class="fact_menu2">
-                <form method="POST" action="menu.php" enctype="multipart/form-data">
-                <p>
-                    <label for="photo_plat">Ajouter la photo du plat: <br/>
-
-                        <img src="../images/basic.png"   id="output"/>
-                    </label>
-                    <input type="file" name="photo_plat" id="photo_plat" accept="image/*" onchange="loadFile(event)" required="required" />
-                 </p>
-
-                <p>
-                    <label for="nomPlat">Entrer le nom du plat: </label>
-                    <input type="text" name="nomPlat" id="nomPlat" required="required" />
-                </p>
-                <p>
-                    <label for="prixPlat">le prix du plat(sans unité ni espace):</label>
-                    <input type="number" name="prixPlat" id="prixPlat" min="0" placeholder="XXXXX" required="required" />
-                </p>
-                <p>
-                    <label>Selectionner une categorie:</label>
-                <?php
-                    $get_categorie = $bdd -> query("SELECT * FROM categoriePlat");
-                     while ($categorie = $get_categorie -> fetch()){
-                    ?>
-                    <label class="select_label" for="categorie<?php echo $categorie['id'];?>"><input type="radio" name="categorie" id="categorie<?php echo $categorie['id'];?>" value="<?php echo $categorie['id'];?>" required="required" /><?php echo $categorie['nomCategorie'];?></label>
-                    <?php
-                    }
-                    ?>
-                    
-                </p>
-                <input type="submit" value="confirmer" class="button"/>
-    
-                </form>
-
-            </div>
+            </section>
 
         </div>
-    </div>
-</div> 
 
-<div class="popup">
+        <?php include("footer.php"); ?>
 
-    <div class="content">
+        <div class="popup">
 
-        <div class="form affiche_menu_principale_liste">
+            <div class="content">
 
-            <label for="checker2">
-                <i class="fas fa-times" ></i>
-            </label>
+                <div class="form affiche_menu_principale_liste">
 
-            <input type="checkbox" id="checker2" />
-            <h2>Selectionner les plats a supprimer</h2>
+                    <label for="checker3">
+                        <i class="fas fa-times" ></i>
+                    </label>
+
+                    <input type="checkbox" id="checker3" />
+                    <h2>Formulaire d'ajout de plat</h2>
+                    <div class="fact_menu2">
+                        <form method="POST" action="menu.php" enctype="multipart/form-data">
+                        <p>
+                            <label for="photo_plat">Ajouter la photo du plat: <br/>
+
+                                <img src="../images/basic.png"   id="output"/>
+                            </label>
+                            <input type="file" name="photo_plat" id="photo_plat" accept="image/*" onchange="loadFile(event)" required="required" />
+                        </p>
+
+                        <p>
+                            <label for="nomPlat">Entrer le nom du plat: </label>
+                            <input type="text" name="nomPlat" id="nomPlat" required="required" />
+                        </p>
+                        <p>
+                            <label for="prixPlat">le prix du plat(sans unité ni espace):</label>
+                            <input type="number" name="prixPlat" id="prixPlat" min="0" placeholder="XXXXX" required="required" />
+                        </p>
+                        <p>
+                            <label>Selectionner une categorie:</label>
+                        <?php
+                            $get_categorie = $bdd -> query("SELECT * FROM categoriePlat");
+                            while ($categorie = $get_categorie -> fetch()){
+                            ?>
+                            <label class="select_label" for="categorie<?php echo $categorie['id'];?>"><input type="radio" name="categorie" id="categorie<?php echo $categorie['id'];?>" value="<?php echo $categorie['id'];?>" required="required" /><?php echo $categorie['nomCategorie'];?></label>
+                            <?php
+                            }
+                            ?>
+                            
+                        </p>
+                        <input type="submit" value="confirmer" class="button"/>
             
-            <div class="fact_menu2 version_fact2">
-
-                                
-                <?php 
-
-
-                $get_categorie = $bdd-> query('SELECT * FROM categorieplat ORDER BY id');
-
-                while ($categorie = $get_categorie -> fetch()){
-
-                ?>
-
-
-
-                <div class='group_plat'>
-                <h2><?php echo($categorie["nomCategorie"] ); ?></h2>
-
-                <?php
-
-                $get_plat = $bdd -> prepare("SELECT * FROM menu WHERE idCategoriePlat = :idCategoriePlat ORDER BY nomPlat");
-
-                $get_plat -> execute(array(
-                    "idCategoriePlat" => $categorie["id"]
-                ));
-
-                while ($plat = $get_plat -> fetch()){
-                ?>
-
-
-
-                <div class="menu_elt" id="meo<?php echo($plat["id"] ); ?>"  onclick='let prix_val = trans_action(<?php echo($plat["id"] ); ?>);'>
-
-                <p >
-                        <img src="../images/plats/<?php echo($plat["photoPlat"] ); ?>" alt="photo de <?php echo($plat["nomPlan"] ); ?>"/>
-                        <input type="hidden" value="<?php echo($plat["id"] ); ?>" />
-                    </p>
-
-                    <div class="menu_center" id="ppp<?php echo($plat["id"] ); ?>"  >
-                        <h3><?php echo($plat["nomPlat"] ); ?></h3>
-                        <p class="ppp" style="text-align:right;width:90%;" id="medic<?php echo($plat["id"]); ?>" ><label style="font-size:1.5em; color:#ff6633;"><i class="fas fa-check-circle"></i></label></p>
+                        </form>
 
                     </div>
 
-                    <table>
-                        <tr>
-                            <th>prix</th>
-                        </tr>
-                        <tr>
-                            <td><?php echo($plat["prix"] ); ?> fcfa</td>
-                        </tr>
-                    </table>
-
-                </div>
-
-                                                
-                <?php
-
-                    }
-                ?>                                
-                </div>
-
-                <?php
-                }
-                ?>
-
-
-            </div>
-
-            <a href="#" class="button" id="confirmer_suo">Confirmer</a>
-
-            
-            
-
-        </div>
-    </div>
-</div> 
-
-
-<!--
-
-        <div class="popup">
-            <div class="content">
-                <div class="form validation_msg">
-                    <label for="checker1">
-                        <i class="fas fa-times" ></i>
-                    </label>
-                    <input type="checkbox" id="checker1" />
-                    <h2 id="title_part_h2"></h2>
-                    <p id = "msg"></p>
                 </div>
             </div>
-        </div>
-
+        </div> 
 
         <div class="popup">
 
             <div class="content">
 
-                <div class="form commande">
+                <div class="form affiche_menu_principale_liste">
 
                     <label for="checker2">
                         <i class="fas fa-times" ></i>
                     </label>
 
                     <input type="checkbox" id="checker2" />
+                    <h2>Selectionner les plats a supprimer</h2>
+                    
+                    <div class="fact_menu2 version_fact2">
 
-                    <h2>Commande</h2>
-
-                    <div id="cont_com">
-
-                        <div id="ver1">
-
-                            <h2>Facture</h2>
-
-                            <div id="fact_menu">
-
-                                <div id="cont_menu"></div>
-
-
-                                <div id="total_menu">
-                                    <h3>
-                                        TOTAL :   <div><span id=result>0</span>f cfa</div>
-                                    </h3>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-                        <div id="ver2">
-                            <h2 id="title_ver2">Menu</h2>
-
-                            <div class="fact_menu2">
-
-                                
-                                    <?php 
-
-
-                                    $get_categorie = $bdd-> query('SELECT * FROM categorieplat ORDER BY id');
-                                    
-                                    while ($categorie = $get_categorie -> fetch()){
-
-                                    ?>
-
-
-
-                                <div class='group_plat'>
-                                    <h2><?php echo($categorie["nomCategorie"] ); ?></h2>
-
-                                <?php
-
-                                    $get_plat = $bdd -> prepare("SELECT * FROM menu WHERE idCategoriePlat = :idCategoriePlat ORDER BY nomPlat");
-
-                                    $get_plat -> execute(array(
-                                        "idCategoriePlat" => $categorie["id"]
-                                    ));
-
-                                    while ($plat = $get_plat -> fetch()){
-                                ?>
-
-
-
-                                    <div class="menu_elt" id="meo<?php echo($plat["id"] ); ?>"  onclick='let prix_val = trans_action(<?php echo($plat["id"] ); ?>);'>
-                                    
-                                    <p >
-                                            <img src="images/plats/<?php echo($plat["photoPlat"] ); ?>" alt=""/>
-                                            <input type="hidden" value="<?php echo($plat["id"] ); ?>" />
-                                        </p>
-                                
-                                        <div class="menu_center" id="ppp<?php echo($plat["id"] ); ?>"  >
-                                            <h3><?php echo($plat["nomPlat"] ); ?></h3>
-                                            <p class="ppp" style="text-align:right;width:90%;" id="medic<?php echo($plat["id"]); ?>" ><label style="font-size:1.5em; color:#ff6633;"><i class="fas fa-check-circle"></i></label></p>
-
-                                        </div>
-                                
-                                        <table>
-                                            <tr>
-                                                <th>prix</th>
-                                            </tr>
-                                            <tr>
-                                                <td><?php echo($plat["prix"] ); ?> fcfa</td>
-                                            </tr>
-                                        </table>
-                                
-                                    </div>
-
-                                                                    
-                                    <?php
-                                    
-                                        }
-                                    ?>                                
-                                </div>
-
-                                <?php
-                                }
-                                ?>
-
-
-                            </div>
-
-                            <div class="fact_menu2">
-                                <form id="adresse_paiement">
-                                    <p>
-                                        <label for="nomComplete">Entrer votre nom et prénom:</label>
-                                        <input type="text" name="nomComplete" id="nomComplete" />
-                                    </p>
-                                    <p>
-                                        <label for="phone">Entrer votre numero :</label>
-                                        <input type="tel" name="phone" id="phone" />
-                                    </p>
-                                    <p>
-                                        <label for="adresse">Entrer l'adresse de livraison :</label>
-                                        <input type="text" name="adresse" id="adresse" />
-                                    </p>
-                                    <p> 
-                                        <label>Selectionner un mode de paiement :</label> 
-                                        <?php 
                                         
-        
+                        <?php 
 
-                                        $get_option = $bdd -> query("SELECT * FROM optionpaiment");
 
-                                        while ($option = $get_option -> fetch()){
+                        $get_categorie = $bdd-> query('SELECT * FROM categorieplat ORDER BY id');
 
-                                        ?>
+                        while ($categorie = $get_categorie -> fetch()){
 
-                                        <input type="radio" name="paiement" class="livraison" id="option<?php echo $option["id"];?>" value="<?php echo $option["id"];?>" />
-                                        <label for="option<?php echo $option["id"];?>">
-                                            <?php echo $option["optionP"];?>
-                                        </label>
-                                        <?php
+                        ?>
 
-                                        }
 
-                                        ?>
-                                    </p>
 
-                                    <input type="submit" value="confirmer" class="button" />
+                        <div class='group_plat'>
+                        <h2><?php echo($categorie["nomCategorie"] ); ?></h2>
 
-                                    
-                                </form>
+                        <?php
+
+                        $get_plat = $bdd -> prepare("SELECT * FROM menu WHERE idCategoriePlat = :idCategoriePlat ORDER BY nomPlat");
+
+                        $get_plat -> execute(array(
+                            "idCategoriePlat" => $categorie["id"]
+                        ));
+
+                        while ($plat = $get_plat -> fetch()){
+                        ?>
+
+
+
+                        <div class="menu_elt" id="meo<?php echo($plat["id"] ); ?>"  onclick='let prix_val = trans_action(<?php echo($plat["id"] ); ?>);'>
+
+                        <p >
+                                <img src="../images/plats/<?php echo($plat["photoPlat"] ); ?>" alt="photo de <?php echo($plat["nomPlan"] ); ?>"/>
+                                <input type="hidden" value="<?php echo($plat["id"] ); ?>" />
+                            </p>
+
+                            <div class="menu_center" id="ppp<?php echo($plat["id"] ); ?>"  >
+                                <h3><?php echo($plat["nomPlat"] ); ?></h3>
+                                <p class="ppp" style="text-align:right;width:90%;" id="medic<?php echo($plat["id"]); ?>" ><label style="font-size:1.5em; color:#ff6633;"><i class="fas fa-check-circle"></i></label></p>
+
                             </div>
 
-                            <div id="fact_select_part">
-                                <p class="previous">
-                                    <label for="previous" id="prev">
-                                        <i class="fas fa-angle-left" ></i>
-                                    </label>
-                                    <input type="checkbox" name="previous" id="previous"/>
-                                </p>
-                                <p class="next">
-                                    <label for="next" id="nex">
-                                        <i class="fas fa-angle-right" ></i>
-                                    </label>
-                                    <input type="checkbox" name="next" id="next"/>
-                                </p>
-                            </div>
-
+                            <table>
+                                <tr>
+                                    <th>prix</th>
+                                </tr>
+                                <tr>
+                                    <td><?php echo($plat["prix"] ); ?> fcfa</td>
+                                </tr>
+                            </table>
 
                         </div>
-        
+
+                                                        
+                        <?php
+
+                            }
+                        ?>                                
+                        </div>
+
+                        <?php
+                        }
+                        ?>
+
+
                     </div>
+
+                    <a href="#" class="button" id="confirmer_suo">Confirmer</a>
+
+                    
+                    
+
                 </div>
             </div>
-        </div>
+        </div> 
 
--->
-
-     <script type="text/javascript" src="script2.js"></script>
+        <script type="text/javascript" src="script2.js"></script>
+        
         <script>
             actived_link_page("menu");
             <?php echo "console.log($error)" ?>
         </script>
+
     </body>
+
 </html>
